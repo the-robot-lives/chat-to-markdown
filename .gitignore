@@ -1,0 +1,15 @@
+# Node / build
+node_modules/
+dist/
+build/
+*.zip
+web-ext-artifacts/
+
+# Env & secrets
+.env*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
