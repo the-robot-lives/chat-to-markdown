@@ -1,9 +1,22 @@
 {
   "manifest_version": 3,
   "name": "Chat to Markdown",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Export LLM chat conversations as clean Markdown or API-format YAML — copy, download, or preview.",
+  "homepage_url": "https://chatup.therobot.codes",
   "permissions": ["clipboardWrite"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
   "content_scripts": [
     {
       "matches": [

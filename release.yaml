@@ -1,0 +1,17 @@
+# Release configuration for chat-to-markdown.
+# Pipeline: .github/workflows/release.yml — runs on every push to `release`.
+
+version:
+  file: chrome/manifest.json   # source of truth — hand-edit for major/minor
+  tag_prefix: v
+
+release:
+  branch: release
+  auto_bump: patch             # when manifest version <= latest tag, bump patch
+
+artifact:
+  name: chat-to-markdown-v{{version}}.zip
+  root: chrome                 # zipped with manifest.json at the archive root
+
+release_notes:
+  body_file: .github/RELEASE_BODY.md   # install notes shipped with every release

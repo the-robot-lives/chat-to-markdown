@@ -94,6 +94,20 @@ adapter object onto `C2M.adapters` with `isCurrentSite()` and `getConversation()
 `manifest.json` `content_scripts.js` and the match pattern to `matches`. Adapters
 speak in DOM elements; the converter never sees site specifics.
 
+## Install
+
+**Release zip (recommended):** grab `chat-to-markdown-v<version>.zip` from
+[Releases](https://github.com/the-robot-lives/chat-to-markdown/releases), unzip,
+then `chrome://extensions` (or `edge://extensions`) → Developer mode →
+**Load unpacked** → select the unzipped folder.
+
+**From source:** clone, then Load unpacked pointing at this repo's `chrome/`
+directory. Every push to the `release` branch publishes a versioned zip with
+patch auto-bumping (see [PUBLISHING.md](PUBLISHING.md)).
+
+After installing or updating, reload the extension card and refresh the chat
+tab — content scripts inject on page load.
+
 ## License
 
 [MIT](LICENSE)
