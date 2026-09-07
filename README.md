@@ -2,7 +2,7 @@
 
 > Browser extension that turns LLM chat conversations into clean, portable Markdown — copy or download in one click.
 
-**Status:** v0.3 — ChatGPT + Claude + Open WebUI + use.ai adapters (verified), Le Chat / Grok / Groq experimental; MD + YAML preview panel, tool-call summaries · **License:** MIT
+**Status:** v0.4 — ChatGPT + Claude + Open WebUI + use.ai + Le Chat adapters (verified), Grok / Groq experimental; MD + YAML preview panel, tool-call summaries · **License:** MIT
 
 ## Why
 
@@ -24,8 +24,8 @@ save as a `.md` file.
 | LMArena | `lmarena.ai` |
 | Open WebUI | self-hosted (generic DOM rules) |
 
-**Shipped:** ChatGPT, **Claude** (live-verified selectors), **Open WebUI** (`webui.noizu.com`; for other self-hosted instances add your domain to `manifest.json` matches — detection keys off the DOM too), **use.ai** (live-verified; a Grok-powered front-end — model picker shows e.g. "Grok 4.6" — distinct from xAI's own grok.com).
-**Experimental** (selectors unverified — button simply won't appear until a matching pair hits): Le Chat (Mistral), Grok (grok.com), Groq (chat.groq.com — the provided page snapshot carried only the app shell, no message DOM). The rest land adapter-by-adapter — see Development below.
+**Shipped:** ChatGPT, **Claude** (live-verified selectors), **Open WebUI** (`webui.noizu.com`; for other self-hosted instances add your domain to `manifest.json` matches — detection keys off the DOM too), **use.ai** (live-verified; a Grok-powered front-end — model picker shows e.g. "Grok 4.6" — distinct from xAI's own grok.com), **Le Chat** (`chat.mistral.ai`, live-verified).
+**Experimental** (selectors unverified — button simply won't appear until a matching pair hits): Grok (grok.com), Groq (chat.groq.com — the provided page snapshot carried only the app shell, no message DOM). The rest land adapter-by-adapter — see Development below.
 
 ## Under consideration (roadmap)
 
