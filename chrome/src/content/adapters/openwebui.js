@@ -11,7 +11,10 @@
   const C2M = (ROOT.ChatToMarkdown = ROOT.ChatToMarkdown || {});
 
   function isCurrentSite() {
-    // any Open WebUI instance, self-hosted anywhere — pure DOM signature
+    // any Open WebUI instance, self-hosted anywhere — pure DOM signature;
+    // known Open WebUI-derived public sites are matched explicitly too
+    const h = location.hostname;
+    if (h === 'chat.z.ai' || h.endsWith('.z.ai')) return true;
     return !!(document.querySelector('[id^="message-"]') &&
               document.querySelector('.chat-assistant, .chat-user'));
   }

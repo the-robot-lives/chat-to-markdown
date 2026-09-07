@@ -2,7 +2,7 @@
 
 > Browser extension that turns LLM chat conversations into clean, portable Markdown — copy or download in one click.
 
-**Status:** v0.6 — ChatGPT + Claude + Gemini + Open WebUI + use.ai + Le Chat adapters (verified), Grok / Groq experimental; MD + YAML preview panel with message-order toggle, tool-call summaries · **License:** MIT
+**Status:** v0.6.1 — ChatGPT + Claude + Gemini + z.ai + Open WebUI (any instance) + use.ai + Le Chat adapters (verified), Grok / Groq experimental; MD + YAML preview panel with message-order toggle, tool-call summaries · **License:** MIT
 
 ## Why
 
@@ -24,8 +24,8 @@ save as a `.md` file.
 | LMArena | `lmarena.ai` |
 | Open WebUI | self-hosted (generic DOM rules) |
 
-**Shipped:** ChatGPT, **Claude** (live-verified selectors), **Gemini** (gemini.google.com, live-verified), **Open WebUI — any self-hosted instance** (pure DOM detection: `[id^="message-"]` + `.chat-user`/`.chat-assistant`; no configuration, the extension injects everywhere but stays inert on unrecognized pages), **use.ai** (live-verified; a Grok-powered front-end — model picker shows e.g. "Grok 4.6" — distinct from xAI's own grok.com), **Le Chat** (`chat.mistral.ai`, live-verified).
-**Experimental** (selectors unverified — button simply won't appear until a matching pair hits): Grok (grok.com), Groq (chat.groq.com — the provided page snapshot carried only the app shell, no message DOM). The rest land adapter-by-adapter — see Development below.
+**Shipped:** ChatGPT, **Claude** (live-verified selectors), **Gemini** (gemini.google.com, live-verified), **Open WebUI — any self-hosted instance** (pure DOM detection: `[id^="message-"]` + `.chat-user`/`.chat-assistant`; no configuration, the extension injects everywhere but stays inert on unrecognized pages; covers **z.ai**, whose chat is Open WebUI-derived — matched explicitly too), **use.ai** (live-verified; a Grok-powered front-end — model picker shows e.g. "Grok 4.6" — distinct from xAI's own grok.com), **Le Chat** (`chat.mistral.ai`, live-verified).
+**Experimental** (selectors unverified — button simply won't appear until a matching pair hits): Grok (grok.com), Groq (chat.groq.com). The rest land adapter-by-adapter — see Development below.
 
 ## Under consideration (roadmap)
 
