@@ -25,6 +25,14 @@
     return (' ' + getAttr(n, 'class') + ' ').indexOf(' ' + name + ' ') !== -1;
   }
 
+  // screen-reader-only / decorative nodes never belong in an export
+  function isHidden(n) {
+    return n.nodeType === 1 &&
+      (getAttr(n, 'aria-hidden') === 'true' ||
+       hasClass(n, 'sr-only') ||
+       hasClass(n, 'visually-hidden'));
+  }
+
   function findAll(node, tag) {
     const out = [];
     (function walk(n) {
@@ -71,6 +79,7 @@
   function inlineMd(node) {
     if (node.nodeType === 3) return node.textContent.replace(/[ \t\r\n]+/g, ' ');
     if (node.nodeType !== 1) return '';
+    if (isHidden(node)) return '';
 
     if (hasClass(node, 'katex')) return '$' + katexTex(node) + '$';
 
@@ -189,6 +198,7 @@
       return t || '';
     }
     if (node.nodeType !== 1) return '';
+    if (isHidden(node)) return '';
 
     switch (node.tagName) {
       case 'H1': case 'H2': case 'H3': case 'H4': case 'H5': case 'H6': {

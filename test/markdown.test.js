@@ -99,3 +99,11 @@ test('assistant-shaped container end to end', () => {
     'Use `Enum.reduce` like this:\n\n```elixir\nEnum.reduce(1..3, 0, &+/2)\n```\n\nThat sums **everything**.'
   );
 });
+
+test('skips sr-only and aria-hidden nodes', () => {
+  const d = h('div', {},
+    h('span', { class: 'sr-only' }, 'Claude responded:'),
+    h('p', {}, 'Real answer'),
+    h('p', { 'aria-hidden': 'true' }, 'decorative'));
+  assert.equal(C2M.domToMarkdown(d), 'Real answer');
+});

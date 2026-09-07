@@ -2,7 +2,7 @@
 
 > Browser extension that turns LLM chat conversations into clean, portable Markdown — copy or download in one click.
 
-**Status:** v0.2 — ChatGPT adapter with markdown + YAML export, preview panel, tool-call summaries · **License:** MIT
+**Status:** v0.3 — ChatGPT + Claude + Open WebUI adapters (verified), Le Chat / use.ai / Grok experimental; MD + YAML preview panel, tool-call summaries · **License:** MIT
 
 ## Why
 
@@ -24,7 +24,8 @@ save as a `.md` file.
 | LMArena | `lmarena.ai` |
 | Open WebUI | self-hosted (generic DOM rules) |
 
-**Shipped:** ChatGPT (v0.1). The rest land adapter-by-adapter — see Development below.
+**Shipped:** ChatGPT, **Claude** (live-verified selectors), **Open WebUI** (`webui.noizu.com`; for other self-hosted instances add your domain to `manifest.json` matches — detection keys off the DOM too).
+**Experimental** (selectors unverified — button simply won't appear until a matching pair hits): Le Chat (Mistral), use.ai, Grok. The rest land adapter-by-adapter — see Development below.
 
 ## Under consideration (roadmap)
 
