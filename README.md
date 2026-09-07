@@ -2,7 +2,7 @@
 
 > Browser extension that turns LLM chat conversations into clean, portable Markdown — copy or download in one click.
 
-**Status:** scaffold / early development · **License:** MIT
+**Status:** v0.1 — ChatGPT adapter implemented (load unpacked to try it); other platforms land adapter-by-adapter · **License:** MIT
 
 ## Why
 
@@ -24,6 +24,8 @@ save as a `.md` file.
 | LMArena | `lmarena.ai` |
 | Open WebUI | self-hosted (generic DOM rules) |
 
+**Shipped:** ChatGPT (v0.1). The rest land adapter-by-adapter — see Development below.
+
 ## Under consideration (roadmap)
 
 DeepSeek (`chat.deepseek.com`) · Qwen (`chat.qwen.ai`) · Kimi (`kimi.com`) ·
@@ -44,11 +46,40 @@ extension core lands.
 - **Batch export** of selected conversations as one file or a zip
 - **No account, no telemetry** — parsing happens locally in the page
 
-## Repository layout (planned)
+## Repository layout
 
 ```
-chrome/        # Manifest V3 extension (site adapters + converter)
+chrome/
+├── manifest.json             # MV3, content-script only (no build step)
+└── src/
+    ├── lib/
+    │   ├── markdown.js       # DOM → Markdown converter (site-agnostic)
+    │   └── export.js         # front-matter, filename, copy/download
+    └── content/
+        ├── adapters/         # one file per site; contract below
+        │   ├── chatgpt.js
+        │   └── index.js      # registry — picks the adapter for this site
+        └── main.js           # floating MD button (shadow DOM)
+test/                          # zero-dep node tests (mini-DOM + fixtures)
 ```
+
+## Development
+
+No build step, no dependencies.
+
+```bash
+node --test               # converter test suite (auto-discovers test/*.test.js)
+```
+
+To try it live: `chrome://extensions` → enable Developer mode → **Load unpacked** →
+select `chrome/`. Open a ChatGPT conversation and use the floating **MD ▾** button
+(Copy Markdown / Download .md).
+
+**Adding a platform:** create `chrome/src/content/adapters/<site>.js` that pushes an
+adapter object onto `C2M.adapters` with `isCurrentSite()` and `getConversation()` →
+`{title, turns: [{role: 'user'|'assistant', element}]}`; add its filename to
+`manifest.json` `content_scripts.js` and the match pattern to `matches`. Adapters
+speak in DOM elements; the converter never sees site specifics.
 
 ## License
 

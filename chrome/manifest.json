@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Chat to Markdown",
+  "version": "0.1.0",
+  "description": "Export LLM chat conversations as clean Markdown — copy or download.",
+  "permissions": ["clipboardWrite"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*"
+      ],
+      "js": [
+        "src/lib/markdown.js",
+        "src/lib/export.js",
+        "src/content/adapters/chatgpt.js",
+        "src/content/adapters/index.js",
+        "src/content/main.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "minimum_chrome_version": "110"
+}
