@@ -2,7 +2,7 @@
 
 > Browser extension that turns LLM chat conversations into clean, portable Markdown — copy or download in one click.
 
-**Status:** v0.1 — ChatGPT adapter implemented (load unpacked to try it); other platforms land adapter-by-adapter · **License:** MIT
+**Status:** v0.2 — ChatGPT adapter with markdown + YAML export, preview panel, tool-call summaries · **License:** MIT
 
 ## Why
 
@@ -37,9 +37,21 @@ GLM (`chat.z.ai`) · MiniMax (`chat.minimax.io`)
 Site adapters are small and isolated; PRs adding a new adapter are welcome once the
 extension core lands.
 
-## Planned features
+## Features
 
-- **One-click copy / download** of the current conversation as `.md`
+- **Preview panel** — the export opens in a panel with **MD** / **YAML** mode tabs,
+  plus Copy, Save, and Refresh; nothing leaves the page until you act
+- **Markdown mode** — front-matter header, `#` title, `## User` / `## Assistant`
+  turns separated by `* * *`, faithful code blocks / tables / lists / math
+- **YAML mode** — the full thread as an API-format payload: a `messages:` list of
+  `role:` / `content:` block-scalar entries; tool invocations become `role: tool`
+  messages (`name:`, `content: tool-call-response: <status> response <size>`)
+- **Tool calls, summarized** — collapsible tool chips (searches, browsing, code
+  runs) export as `tool-call made to …` / `tool-call-response: …` lines instead
+  of their collapsed payload
+- **One-click copy / download** of the current conversation
+
+## Planned
 - **Front-matter header**: source site, model, conversation title, date, URL
 - **Faithful conversion**: fenced code blocks (language-tagged), tables, lists, blockquotes
 - **Turn-by-turn speaker labels** (`## User` / `## Assistant`, artifacts kept inline)
