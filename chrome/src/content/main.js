@@ -1,7 +1,8 @@
 /*
- * Floating export button + preview panel with Markdown / YAML modes
- * (shadow DOM so site styles can't touch it, and it can't touch site styles).
- * Attached to <html> so SPA re-renders inside body don't remove it.
+ * Floating export button + preview panel with Markdown / YAML modes and an
+ * ascending/descending message-order toggle (shadow DOM so site styles can't
+ * touch it, and it can't touch site styles). Attached to <html> so SPA
+ * re-renders inside body don't remove it.
  */
 (function () {
   const C2M = window.ChatToMarkdown;
@@ -42,6 +43,7 @@
       .c2m-btn:hover { background:#3a4150; }
       .c2m-btn.primary { background:#4f6ef7; border-color:#4f6ef7; }
       .c2m-btn.primary:hover { background:#3d5cf0; }
+      .c2m-btn.on { background:#4f6ef7; border-color:#4f6ef7; }
       .c2m-toggle { background:#1f2430; color:#e8eaed; border:1px solid #3a4150;
                     border-radius:999px; padding:7px 14px; font:600 12px system-ui,sans-serif;
                     cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,.3); }
@@ -61,6 +63,7 @@
             <button data-mode="md" class="active">MD</button>
             <button data-mode="yaml">YAML</button>
           </div>
+          <button class="c2m-btn" data-role="sort" title="Reverse message order (newest first)">⇅</button>
           <button class="c2m-btn" data-role="close" title="Close">✕</button>
         </div>
         <div class="c2m-body"><textarea data-role="preview" readonly spellcheck="false"></textarea></div>
@@ -83,8 +86,10 @@
   const toggle = qs('[data-role="toggle"]');
   const toast = qs('[data-role="toast"]');
 
-  let docs = null;   // {base, md, yaml}
+  let capture = null;  // {meta, base, turns:[{role, element, elementClean, tools}]}
+  let docs = null;     // {base, md, yaml} for the current mode/order
   let mode = 'md';
+  let reverse = false; // false = chronological (oldest first), true = newest first
 
   function showToast(msg) {
     toast.textContent = msg;
@@ -92,13 +97,13 @@
     setTimeout(function () { toast.classList.remove('show'); }, 1800);
   }
 
-  function buildDocs() {
+  function captureDoc() {
     const conv = adapter.getConversation();
     if (!conv || !conv.turns.length) {
       showToast('No conversation found');
       return null;
     }
-    const prepared = conv.turns.map(function (t) {
+    const turns = conv.turns.map(function (t) {
       if (adapter.prepareTurn) {
         const p = adapter.prepareTurn(t.element);
         return {
@@ -117,15 +122,23 @@
       date: new Date().toISOString().slice(0, 10)
     };
     const base = C2M.export.buildFilename(conv.title).replace(/\.md$/, '');
-    return {
-      base: base,
-      md: C2M.export.buildDocument(meta, prepared.map(function (p) {
-        return { role: p.role, element: p.element };
-      })),
-      yaml: C2M.export.buildYaml(meta, prepared.map(function (p) {
-        return { role: p.role, element: p.elementClean, tools: p.tools };
-      }))
-    };
+    return { meta: meta, base: base, turns: turns };
+  }
+
+  function buildFor(m) {
+    let turns = capture.turns.slice();
+    if (reverse) turns.reverse();
+    return m === 'md'
+      ? C2M.export.buildDocument(capture.meta, turns.map(function (p) {
+          return { role: p.role, element: p.element };
+        }))
+      : C2M.export.buildYaml(capture.meta, turns.map(function (p) {
+          return { role: p.role, element: p.elementClean, tools: p.tools };
+        }));
+  }
+
+  function rebuild() {
+    docs = { base: capture.base, md: buildFor('md'), yaml: buildFor('yaml') };
   }
 
   function applyMode() {
@@ -140,8 +153,9 @@
   }
 
   function openPanel() {
-    docs = buildDocs();
-    if (!docs) return;
+    capture = captureDoc();
+    if (!capture) return;
+    rebuild();
     applyMode();
     panel.classList.add('open');
     toggle.textContent = 'MD ▴';
@@ -165,12 +179,24 @@
     });
   });
 
+  qs('[data-role="sort"]').addEventListener('click', function () {
+    if (!capture) return;
+    reverse = !reverse;
+    this.classList.toggle('on', reverse);
+    const scroll = preview.scrollTop;
+    rebuild();
+    applyMode();
+    preview.scrollTop = preview.scrollHeight - preview.clientHeight - scroll;
+    showToast(reverse ? 'Newest first' : 'Oldest first');
+  });
+
   qs('[data-role="refresh"]').addEventListener('click', function () {
     const scroll = preview.scrollTop;
-    docs = buildDocs();
-    if (docs) {
+    capture = captureDoc();
+    if (capture) {
+      rebuild();
       applyMode();
-      preview.scrollTop = scroll;
+      preview.scrollTop = Math.max(0, preview.scrollHeight - preview.clientHeight - scroll);
       showToast('Preview refreshed');
     }
   });

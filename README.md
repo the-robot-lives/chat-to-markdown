@@ -2,7 +2,7 @@
 
 > Browser extension that turns LLM chat conversations into clean, portable Markdown — copy or download in one click.
 
-**Status:** v0.5 — ChatGPT + Claude + Gemini + Open WebUI + use.ai + Le Chat adapters (verified), Grok / Groq experimental; MD + YAML preview panel, tool-call summaries · **License:** MIT
+**Status:** v0.6 — ChatGPT + Claude + Gemini + Open WebUI + use.ai + Le Chat adapters (verified), Grok / Groq experimental; MD + YAML preview panel with message-order toggle, tool-call summaries · **License:** MIT
 
 ## Why
 
@@ -42,6 +42,8 @@ extension core lands.
 
 - **Preview panel** — the export opens in a panel with **MD** / **YAML** mode tabs,
   plus Copy, Save, and Refresh; nothing leaves the page until you act
+- **Message order** — the ⇅ toggle flips the export between chronological
+  (oldest first) and newest-first
 - **Markdown mode** — front-matter header, `#` title, `## User` / `## Assistant`
   turns separated by `* * *`, faithful code blocks / tables / lists / math
 - **YAML mode** — the full thread as an API-format payload: a `messages:` list of
