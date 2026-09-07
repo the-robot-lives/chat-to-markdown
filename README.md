@@ -25,7 +25,7 @@ save as a `.md` file.
 | Open WebUI | self-hosted (generic DOM rules) |
 
 **Shipped:** ChatGPT, **Claude** (live-verified selectors), **Open WebUI** (`webui.noizu.com`; for other self-hosted instances add your domain to `manifest.json` matches — detection keys off the DOM too).
-**Experimental** (selectors unverified — button simply won't appear until a matching pair hits): Le Chat (Mistral), use.ai, Grok. The rest land adapter-by-adapter — see Development below.
+**Experimental** (selectors unverified — button simply won't appear until a matching pair hits): Le Chat (Mistral), use.ai, Grok, Groq (chat.groq.com — the provided page snapshot carried only the app shell, no message DOM). The rest land adapter-by-adapter — see Development below.
 
 ## Under consideration (roadmap)
 

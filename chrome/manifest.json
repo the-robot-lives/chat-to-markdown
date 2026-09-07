@@ -13,7 +13,8 @@
         "https://chat.mistral.ai/*",
         "https://webui.noizu.com/*",
         "https://use.ai/*",
-        "https://grok.com/*"
+        "https://grok.com/*",
+        "https://chat.groq.com/*"
       ],
       "js": [
         "src/lib/markdown.js",
@@ -26,6 +27,7 @@
         "src/content/adapters/mistral.js",
         "src/content/adapters/useai.js",
         "src/content/adapters/grok.js",
+        "src/content/adapters/groq.js",
         "src/content/adapters/index.js",
         "src/content/main.js"
       ],
