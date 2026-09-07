@@ -3,13 +3,20 @@
  * ascending/descending message-order toggle (shadow DOM so site styles can't
  * touch it, and it can't touch site styles). Attached to <html> so SPA
  * re-renders inside body don't remove it.
+ *
+ * Detection retries: adapters keyed to hostnames match at document_idle, but
+ * DOM-signature adapters (Open WebUI family, e.g. z.ai) can only match once
+ * the SPA actually mounts a conversation — so start() is re-run on a short
+ * interval until it wins.
  */
 (function () {
   const C2M = window.ChatToMarkdown;
   if (!C2M || !C2M.getActiveAdapter) return;
-  const adapter = C2M.getActiveAdapter();
-  if (!adapter) return;
-  if (document.getElementById('chat-to-markdown-host')) return;
+
+  let adapter = null;
+
+  function inject() {
+    if (document.getElementById('chat-to-markdown-host')) return;
 
   const host = document.createElement('div');
   host.id = 'chat-to-markdown-host';
@@ -213,4 +220,19 @@
     C2M.export.downloadText(name, preview.value);
     showToast('Downloaded ' + name);
   });
+  }
+
+  function start() {
+    if (document.getElementById('chat-to-markdown-host')) return true;
+    adapter = C2M.getActiveAdapter();
+    if (!adapter) return false;
+    inject();
+    return true;
+  }
+
+  if (!start()) {
+    const poll = setInterval(function () {
+      if (start()) clearInterval(poll);
+    }, 1500);
+  }
 })();
