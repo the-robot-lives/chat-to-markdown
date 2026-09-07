@@ -1,18 +1,19 @@
 /*
- * Site adapter: Open WebUI (self-hosted; webui.noizu.com).
- * Open-source UI with stable markers: message containers [id^="message-"]
- * (content child [id$="-content"]), role wrappers .chat-user / .chat-assistant.
- * For other self-hosted instances, add the domain to manifest.json matches —
- * detection also keys off the DOM, not just the hostname.
+ * Site adapter: Open WebUI (self-hosted — ANY instance).
+ * Detection is DOM-based, not hostname-based: Open WebUI renders message
+ * containers as [id^="message-"] (content child [id$="-content"]) with
+ * .chat-user / .chat-assistant role wrappers. The extension injects on all
+ * http(s) pages but stays inert unless this signature (or another adapter's
+ * site) matches. No instance configuration needed.
  */
 (function () {
   const ROOT = typeof window !== 'undefined' ? window : globalThis;
   const C2M = (ROOT.ChatToMarkdown = ROOT.ChatToMarkdown || {});
 
   function isCurrentSite() {
-    const h = location.hostname;
-    if (h === 'noizu.com' || h.endsWith('.noizu.com')) return true;
-    return !!document.querySelector('[id^="message-"] .chat-assistant');
+    // any Open WebUI instance, self-hosted anywhere — pure DOM signature
+    return !!(document.querySelector('[id^="message-"]') &&
+              document.querySelector('.chat-assistant, .chat-user'));
   }
 
   function getTurns() {

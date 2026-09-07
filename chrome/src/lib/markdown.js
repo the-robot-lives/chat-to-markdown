@@ -29,8 +29,7 @@
   function isHidden(n) {
     return n.nodeType === 1 &&
       (getAttr(n, 'aria-hidden') === 'true' ||
-       hasClass(n, 'sr-only') ||
-       hasClass(n, 'visually-hidden'));
+       /(^|\s)(sr-only|cdk-visually-hidden|visually-hidden)(\s|$)/.test(getAttr(n, 'class')));
   }
 
   function findAll(node, tag) {

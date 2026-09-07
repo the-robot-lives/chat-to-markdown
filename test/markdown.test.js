@@ -103,6 +103,7 @@ test('assistant-shaped container end to end', () => {
 test('skips sr-only and aria-hidden nodes', () => {
   const d = h('div', {},
     h('span', { class: 'sr-only' }, 'Claude responded:'),
+    h('h5', { class: 'cdk-visually-hidden' }, 'You said:'),
     h('p', {}, 'Real answer'),
     h('p', { 'aria-hidden': 'true' }, 'decorative'));
   assert.equal(C2M.domToMarkdown(d), 'Real answer');
