@@ -2,7 +2,7 @@
 
 > Browser extension that turns LLM chat conversations into clean, portable Markdown — copy or download in one click.
 
-**Status:** scaffold / early development · **License:** MIT
+**Status:** v0.6 — ChatGPT + Claude + Gemini + Open WebUI + use.ai + Le Chat adapters (verified), Grok / Groq experimental; MD + YAML preview panel with message-order toggle, tool-call summaries · **License:** MIT
 
 ## Why
 
@@ -24,6 +24,9 @@ save as a `.md` file.
 | LMArena | `lmarena.ai` |
 | Open WebUI | self-hosted (generic DOM rules) |
 
+**Shipped:** ChatGPT, **Claude** (live-verified selectors), **Gemini** (gemini.google.com, live-verified), **Open WebUI — any self-hosted instance** (pure DOM detection: `[id^="message-"]` + `.chat-user`/`.chat-assistant`; no configuration, the extension injects everywhere but stays inert on unrecognized pages), **use.ai** (live-verified; a Grok-powered front-end — model picker shows e.g. "Grok 4.6" — distinct from xAI's own grok.com), **Le Chat** (`chat.mistral.ai`, live-verified).
+**Experimental** (selectors unverified — button simply won't appear until a matching pair hits): Grok (grok.com), Groq (chat.groq.com — the provided page snapshot carried only the app shell, no message DOM). The rest land adapter-by-adapter — see Development below.
+
 ## Under consideration (roadmap)
 
 DeepSeek (`chat.deepseek.com`) · Qwen (`chat.qwen.ai`) · Kimi (`kimi.com`) ·
@@ -35,20 +38,77 @@ GLM (`chat.z.ai`) · MiniMax (`chat.minimax.io`)
 Site adapters are small and isolated; PRs adding a new adapter are welcome once the
 extension core lands.
 
-## Planned features
+## Features
 
-- **One-click copy / download** of the current conversation as `.md`
+- **Preview panel** — the export opens in a panel with **MD** / **YAML** mode tabs,
+  plus Copy, Save, and Refresh; nothing leaves the page until you act
+- **Message order** — the ⇅ toggle flips the export between chronological
+  (oldest first) and newest-first
+- **Markdown mode** — front-matter header, `#` title, `## User` / `## Assistant`
+  turns separated by `* * *`, faithful code blocks / tables / lists / math
+- **YAML mode** — the full thread as an API-format payload: a `messages:` list of
+  `role:` / `content:` block-scalar entries; tool invocations become `role: tool`
+  messages (`name:`, `content: tool-call-response: <status> response <size>`)
+- **Tool calls, summarized** — collapsible tool chips (searches, browsing, code
+  runs) export as `tool-call made to …` / `tool-call-response: …` lines instead
+  of their collapsed payload
+- **One-click copy / download** of the current conversation
+
+## Planned
 - **Front-matter header**: source site, model, conversation title, date, URL
 - **Faithful conversion**: fenced code blocks (language-tagged), tables, lists, blockquotes
 - **Turn-by-turn speaker labels** (`## User` / `## Assistant`, artifacts kept inline)
 - **Batch export** of selected conversations as one file or a zip
 - **No account, no telemetry** — parsing happens locally in the page
 
-## Repository layout (planned)
+## Repository layout
 
 ```
-chrome/        # Manifest V3 extension (site adapters + converter)
+chrome/
+├── manifest.json             # MV3, content-script only (no build step)
+└── src/
+    ├── lib/
+    │   ├── markdown.js       # DOM → Markdown converter (site-agnostic)
+    │   └── export.js         # front-matter, filename, copy/download
+    └── content/
+        ├── adapters/         # one file per site; contract below
+        │   ├── chatgpt.js
+        │   └── index.js      # registry — picks the adapter for this site
+        └── main.js           # floating MD button (shadow DOM)
+test/                          # zero-dep node tests (mini-DOM + fixtures)
 ```
+
+## Development
+
+No build step, no dependencies.
+
+```bash
+node --test               # converter test suite (auto-discovers test/*.test.js)
+```
+
+To try it live: `chrome://extensions` → enable Developer mode → **Load unpacked** →
+select `chrome/`. Open a ChatGPT conversation and use the floating **MD ▾** button
+(Copy Markdown / Download .md).
+
+**Adding a platform:** create `chrome/src/content/adapters/<site>.js` that pushes an
+adapter object onto `C2M.adapters` with `isCurrentSite()` and `getConversation()` →
+`{title, turns: [{role: 'user'|'assistant', element}]}`; add its filename to
+`manifest.json` `content_scripts.js` and the match pattern to `matches`. Adapters
+speak in DOM elements; the converter never sees site specifics.
+
+## Install
+
+**Release zip (recommended):** grab `chat-to-markdown-v<version>.zip` from
+[Releases](https://github.com/the-robot-lives/chat-to-markdown/releases), unzip,
+then `chrome://extensions` (or `edge://extensions`) → Developer mode →
+**Load unpacked** → select the unzipped folder.
+
+**From source:** clone, then Load unpacked pointing at this repo's `chrome/`
+directory. Every push to the `release` branch publishes a versioned zip with
+patch auto-bumping (see [PUBLISHING.md](PUBLISHING.md)).
+
+After installing or updating, reload the extension card and refresh the chat
+tab — content scripts inject on page load.
 
 ## License
 

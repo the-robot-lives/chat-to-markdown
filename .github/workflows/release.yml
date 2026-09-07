@@ -1,0 +1,57 @@
+name: release
+
+on:
+  push:
+    branches: [release]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine version (auto patch-bump when manifest <= latest tag)
+        id: ver
+        run: |
+          V=$(python3 -c "import json;print(json.load(open('chrome/manifest.json'))['version'])")
+          LAST=$(git tag -l 'v*' --sort=-v:refname | head -1 | sed 's/^v//')
+          if [ -z "$LAST" ]; then
+            NEW="$V"
+          else
+            LOWEST=$(printf '%s\n%s\n' "$LAST" "$V" | sort -V | head -1)
+            if [ "$LOWEST" = "$LAST" ] && [ "$LAST" != "$V" ]; then
+              NEW="$V"
+            else
+              NEW=$(python3 -c "import sys;a,b,c=sys.argv[1].split('.');print(f'{a}.{b}.{int(c)+1}')" "$V")
+            fi
+          fi
+          echo "version=$NEW" >> "$GITHUB_OUTPUT"
+          [ "$NEW" != "$V" ] && echo "bumped=true" >> "$GITHUB_OUTPUT" || true
+          echo "manifest=$V -> release=$NEW (last tag: ${LAST:-none})"
+
+      - name: Commit auto-bump
+        if: steps.ver.outputs.bumped == 'true'
+        run: |
+          python3 -c "import json,sys;p='chrome/manifest.json';d=json.load(open(p));d['version']=sys.argv[1];f=open(p,'w');json.dump(d,f,indent=2);f.write('\n')" "${{ steps.ver.outputs.version }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore(release): v${{ steps.ver.outputs.version }} [skip ci]"
+          git push
+
+      - name: Package zip
+        run: |
+          cd chrome
+          zip -r "../chat-to-markdown-v${{ steps.ver.outputs.version }}.zip" . -x '.*'
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.ver.outputs.version }}
+        run: |
+          gh release create "v$VERSION" \
+            "chat-to-markdown-v$VERSION.zip" \
+            --title "Chat to Markdown v$VERSION" \
+            --notes-file .github/RELEASE_BODY.md
