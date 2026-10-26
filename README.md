@@ -16,9 +16,9 @@ A Manifest V3 Chrome extension (content-script only, no build step, no dependenc
 
 **Live-verified adapters:** ChatGPT, Claude, Gemini (`gemini.google.com`), z.ai, Open WebUI (any self-hosted instance — pure DOM detection, covers Open WebUI-derived sites), use.ai (a Grok-powered front-end, distinct from xAI's grok.com), Le Chat (`chat.mistral.ai`).
 
-**Experimental** (selectors unverified — the button simply won't appear until a matching pair hits): Grok (`grok.com`, `x.com`), Groq (`chat.groq.com`). Also in-tree: Cerebras Inference Chat, LMArena.
+**Experimental** (selectors unverified — the button simply won't appear until a matching pair hits): Grok (`grok.com`, `x.com`), Groq (`chat.groq.com`).
 
-**Roadmap (under consideration):** DeepSeek · Qwen · Kimi · Microsoft Copilot · Meta AI · HuggingChat · Perplexity · Poe · OpenRouter Chat · Character.AI · GLM · MiniMax. Site adapters are small and isolated; PRs adding a new adapter are welcome.
+**Roadmap (under consideration):** Cerebras Inference Chat · LMArena · DeepSeek · Qwen · Kimi · Microsoft Copilot · Meta AI · HuggingChat · Perplexity · Poe · OpenRouter Chat · Character.AI · GLM · MiniMax. Site adapters are small and isolated; PRs adding a new adapter are welcome.
 
 ## Features
 
