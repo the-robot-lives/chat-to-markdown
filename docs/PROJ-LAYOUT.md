@@ -53,7 +53,8 @@ chat-to-markdown/
   `window.ChatToMarkdown` (`C2M`) global — there are no imports.
 - **No required configuration.** There is no `.envrc`, `.env.example`, or
   build config; the repo is loaded unpacked directly from `chrome/`.
-- **README discrepancy (verified 2026-10-27):** the README's "Also in-tree:
-  Cerebras Inference Chat, LMArena" has no corresponding adapter files in the
-  tree, and grok.js matches `grok.com` only (not `x.com/i/grok`). The only
-  generic-engine adapters present are `grok.js` and `groq.js`.
+- **README drift (checked 2026-10-27, post-#3):** README now lists Cerebras
+  Inference Chat / LMArena under Roadmap (accurate — no such adapter files in
+  tree). One residual mismatch: the Experimental line still claims `x.com`
+  for Grok, but `grok.js` matches `grok.com` only (per its own header and
+  `hosts`). The generic-engine adapters present are `grok.js` and `groq.js`.
