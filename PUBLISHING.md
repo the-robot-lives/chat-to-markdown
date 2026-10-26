@@ -1,5 +1,7 @@
 # Publishing runbook — chat-to-markdown
 
+<!-- 〚📁:011549b4-a645-5ee4-9210-375c6fee1494〛 chat-to-markdown publishing runbook :: GitHub Releases + Chrome/Edge store publishing guide -->
+
 Two channels: **GitHub Releases** (developer-mode zip, fully automated) and
 the **stores** (Chrome Web Store / Edge Add-ons, manual upload per version).
 

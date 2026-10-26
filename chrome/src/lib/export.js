@@ -1,3 +1,4 @@
+// 〚📁:5d2cf87b-56fc-5773-9676-e8ab92eeb822〛 chat-to-markdown export :: Document assembly (MD+YAML), filename slugging, copy/download
 /*
  * chat-to-markdown — document assembly + copy/download actions.
  * Two export modes: Markdown (buildDocument) and API-format YAML

@@ -1,0 +1,122 @@
+---
+pointers:
+  011549b4-a645-5ee4-9210-375c6fee1494:
+    created_at: 2026-10-26T23:08:57.782789Z
+    description: GitHub Releases + Chrome/Edge store publishing guide
+    file_path: PUBLISHING.md
+    function: chat-to-markdown publishing runbook
+    kind: file
+    line: 3
+    locations:
+      - file_path: PUBLISHING.md
+        line: 3
+    token: 𓸃𓑪𓨀𔆤
+    updated_at: 2026-10-26T23:08:57.782789Z
+  030d1613-caee-508b-bfc3-7508da72a948:
+    created_at: 2026-10-26T23:08:57.782785Z
+    description: Picks the first adapter whose isCurrentSite() matches the page
+    file_path: chrome/src/content/adapters/index.js
+    function: chat-to-markdown adapter registry
+    kind: file
+    line: 1
+    locations:
+      - file_path: chrome/src/content/adapters/index.js
+        line: 1
+    token: 𓳘𓔎𓟆𓞸
+    updated_at: 2026-10-26T23:08:57.782785Z
+  1c3734e7-60d6-50c3-81cf-2a3779fff9a4:
+    created_at: 2026-10-26T23:08:57.782746Z
+    description: ChatGPT adapter — canonical reference for the adapter contract
+    file_path: chrome/src/content/adapters/chatgpt.js
+    function: chat-to-markdown chatgpt adapter
+    kind: file
+    line: 1
+    locations:
+      - file_path: chrome/src/content/adapters/chatgpt.js
+        line: 1
+    token: 𓆉𓜌𓔭𔌄
+    updated_at: 2026-10-26T23:08:57.782746Z
+  1ef9fa41-95a6-5bcd-a207-ab9f7b0d8564:
+    created_at: 2026-10-26T23:08:57.782781Z
+    description: Floating MD button + shadow-DOM preview panel (MD/YAML tabs, order toggle, copy/save)
+    file_path: chrome/src/content/main.js
+    function: chat-to-markdown content main
+    kind: file
+    line: 1
+    locations:
+      - file_path: chrome/src/content/main.js
+        line: 1
+    token: 𓞡𓳶𔓛𓒤
+    updated_at: 2026-10-26T23:08:57.782781Z
+  2d04b7b8-64c1-508d-853e-8f9959e1079b:
+    created_at: 2026-10-26T23:08:57.782800Z
+    description: Site-agnostic DOM-to-Markdown converter
+    file_path: chrome/src/lib/markdown.js
+    function: chat-to-markdown markdown converter
+    kind: file
+    line: 1
+    locations:
+      - file_path: chrome/src/lib/markdown.js
+        line: 1
+    token: 𔊰𓎴𔂞𓅛
+    updated_at: 2026-10-26T23:08:57.782800Z
+  35686b75-a282-59f3-9ede-e70db7cb52d5:
+    created_at: 2026-10-26T23:08:57.782813Z
+    description: Shared prepareTurn — collapses tool chips into summary lines or role:tool records
+    file_path: chrome/src/content/adapters/tool-calls.js
+    function: chat-to-markdown tool-call summarizer
+    kind: file
+    line: 1
+    locations:
+      - file_path: chrome/src/content/adapters/tool-calls.js
+        line: 1
+    token: 𔔬𔔗𓿸𔙥
+    updated_at: 2026-10-26T23:08:57.782813Z
+  54472706-1945-567e-93b4-81dac0ee17da:
+    created_at: 2026-10-26T23:08:57.782795Z
+    description: Push-to-release packaging pipeline (auto-bump, zip, GitHub Release)
+    file_path: .github/workflows/release.yml
+    function: chat-to-markdown release workflow
+    kind: file
+    line: 1
+    locations:
+      - file_path: .github/workflows/release.yml
+        line: 1
+    token: 𔃥𔃔𔈕𔎺
+    updated_at: 2026-10-26T23:08:57.782795Z
+  5d2cf87b-56fc-5773-9676-e8ab92eeb822:
+    created_at: 2026-10-26T23:08:57.782804Z
+    description: Document assembly (MD+YAML), filename slugging, copy/download
+    file_path: chrome/src/lib/export.js
+    function: chat-to-markdown export
+    kind: file
+    line: 1
+    locations:
+      - file_path: chrome/src/lib/export.js
+        line: 1
+    token: 𔍩𓨻𓾧𓃲
+    updated_at: 2026-10-26T23:08:57.782804Z
+  cd3ed780-323f-5d30-a4f4-361c8f6403e7:
+    created_at: 2026-10-26T23:08:57.782809Z
+    description: Candidate selector-pair engine for experimental sites
+    file_path: chrome/src/content/adapters/generic.js
+    function: chat-to-markdown generic adapter engine
+    kind: file
+    line: 1
+    locations:
+      - file_path: chrome/src/content/adapters/generic.js
+        line: 1
+    token: 𔑡𓤇𓒋𓔧
+    updated_at: 2026-10-26T23:08:57.782809Z
+  ce90450f-c837-577e-8c1d-f10c787b4040:
+    created_at: 2026-10-26T23:08:57.782775Z
+    description: Repo entry point — features, supported sites, install
+    file_path: README.md
+    function: chat-to-markdown README
+    kind: file
+    line: 3
+    locations:
+      - file_path: README.md
+        line: 3
+    token: 𓈔𓻽𓀗𔅀
+    updated_at: 2026-10-26T23:08:57.782775Z

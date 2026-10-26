@@ -1,3 +1,4 @@
+// 〚📁:cd3ed780-323f-5d30-a4f4-361c8f6403e7〛 chat-to-markdown generic adapter engine :: Candidate selector-pair engine for experimental sites
 /*
  * Generic adapter engine for sites without live-verified selectors.
  * Tries a list of {user, assistant} selector pairs until one matches; when

@@ -1,3 +1,4 @@
+# 〚📁:54472706-1945-567e-93b4-81dac0ee17da〛 chat-to-markdown release workflow :: Push-to-release packaging pipeline (auto-bump, zip, GitHub Release)
 name: release
 
 on:

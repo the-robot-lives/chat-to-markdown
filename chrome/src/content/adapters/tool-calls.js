@@ -1,3 +1,4 @@
+// 〚📁:35686b75-a282-59f3-9ede-e70db7cb52d5〛 chat-to-markdown tool-call summarizer :: Shared prepareTurn — collapses tool chips into summary lines or role:tool records
 /*
  * Shared tool-call summarization for adapters.
  *
