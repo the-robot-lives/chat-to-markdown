@@ -1,3 +1,4 @@
+// 〚📁:1c3734e7-60d6-50c3-81cf-2a3779fff9a4〛 chat-to-markdown chatgpt adapter :: ChatGPT adapter — canonical reference for the adapter contract
 /*
  * Site adapter: ChatGPT (chatgpt.com, chat.openai.com).
  *

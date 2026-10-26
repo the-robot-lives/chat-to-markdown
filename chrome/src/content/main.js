@@ -1,3 +1,4 @@
+// 〚📁:1ef9fa41-95a6-5bcd-a207-ab9f7b0d8564〛 chat-to-markdown content main :: Floating MD button + shadow-DOM preview panel (MD/YAML tabs, order toggle, copy/save)
 /*
  * Floating export button + preview panel with Markdown / YAML modes and an
  * ascending/descending message-order toggle (shadow DOM so site styles can't

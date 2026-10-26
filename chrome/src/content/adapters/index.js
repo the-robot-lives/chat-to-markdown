@@ -1,3 +1,4 @@
+// 〚📁:030d1613-caee-508b-bfc3-7508da72a948〛 chat-to-markdown adapter registry :: Picks the first adapter whose isCurrentSite() matches the page
 /*
  * Adapter registry — picks the adapter for the current site.
  */

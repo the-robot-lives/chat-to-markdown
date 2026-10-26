@@ -1,5 +1,7 @@
 # chat-to-markdown
 
+<!-- 〚📁:ce90450f-c837-577e-8c1d-f10c787b4040〛 chat-to-markdown README :: Repo entry point — features, supported sites, install -->
+
 **Repo:** https://github.com/the-robot-lives/chat-to-markdown
 
 > Browser extension that turns LLM chat conversations into clean, portable Markdown — copy or download in one click.

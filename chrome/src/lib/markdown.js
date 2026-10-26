@@ -1,3 +1,4 @@
+// 〚📁:2d04b7b8-64c1-508d-853e-8f9959e1079b〛 chat-to-markdown markdown converter :: Site-agnostic DOM-to-Markdown converter
 /*
  * chat-to-markdown — DOM → Markdown converter.
  *
