@@ -37,6 +37,9 @@ chat-to-markdown/
 ├── .github/
 │   ├── workflows/release.yml        # Release pipeline — runs on every push to the `release` branch
 │   └── RELEASE_BODY.md              # Install notes attached to every GitHub release
+├── .meta/
+│   └── pointers.yaml               # doc-pointer store — 10 file-level anchors (PR #4)
+├── docs/                           # Project docs: layout / arch / schema / threat-model (+ .summary.md companions)
 ├── release.yaml                     # Release pipeline config: version file, branch, auto_bump policy, artifact name
 ├── PUBLISHING.md                    # Publishing runbook: GitHub Releases (automated) + Chrome/Edge stores (manual)
 ├── PRIVACY.md                       # Privacy policy — local-only processing, no collection
@@ -53,8 +56,9 @@ chat-to-markdown/
   `window.ChatToMarkdown` (`C2M`) global — there are no imports.
 - **No required configuration.** There is no `.envrc`, `.env.example`, or
   build config; the repo is loaded unpacked directly from `chrome/`.
-- **README drift (checked 2026-10-27, post-#3):** README now lists Cerebras
-  Inference Chat / LMArena under Roadmap (accurate — no such adapter files in
-  tree). One residual mismatch: the Experimental line still claims `x.com`
-  for Grok, but `grok.js` matches `grok.com` only (per its own header and
-  `hosts`). The generic-engine adapters present are `grok.js` and `groq.js`.
+- **README drift (resolved 2026-10-27):** README's Experimental line claimed
+  `x.com` for Grok, but `grok.js` matches `grok.com` only (per its own header
+  and `hosts`) — README corrected this pass and now notes x.com is not
+  matched yet. Roadmap entries (Cerebras Inference Chat / LMArena) remain
+  accurate — no such adapter files in tree. Generic-engine adapters present:
+  `grok.js` and `groq.js`.
